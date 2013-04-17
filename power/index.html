@@ -1,0 +1,76 @@
+<html ng-app>
+	<head>
+		<title>The power of Angular</title>	
+	</head>
+	<body>
+		<h1>Digigroup members</h1>		
+		<ul ng-controller="PowerController">
+			<li ng-repeat="member in team">
+				<a href="/team/member/{{member.id}}">{{member.name}}</a>
+			</li>
+		</ul>
+
+		<h1>Projetos</h1>
+		<table ng-controller="ProjectController">
+			<tr>	
+				<th>ID</th>
+				<th>Nome</th>
+				<th>URL</th>
+			</tr>	
+			<tr ng-repeat="project in projects">	
+				<td>{{index + 1}}</td>
+				<td>{{project.name}}</td>	
+				<td>{{project.url}}</td>
+			</tr>	
+		</table>		
+
+		<h1>SHOW/HIDE</h1>		
+		<div ng-controller="MenuController">
+			<button ng-click="toggleMenu()">Toogle Menu</button>
+			<ul ng-show="menuState.show">
+				<li ng-click="stun()">Stun</li>
+				<li ng-click="disintegrate()">Disintegrate</li>
+				<li ng-click="erase()">Erase from history</li>
+			</ul>
+		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+		<script>
+			var team = [
+				{name: 'Eduardo Alencar', id: '1'},
+				{name: 'Samuel Fernandes', id: '2'},
+				{name: 'Bruno Gama', id: '3'}
+			];
+
+			var projects = [
+				{name: 'Portal As meninas online', url: 'http://asmeninasonline.com.br'},
+				{name: 'Manutenção Giraffas', url: 'http://giraffas.com.br'},
+
+			]
+
+			function PowerController($scope) {
+				$scope.team = team;
+
+				$scope.insertTom = function() {
+					$scope.team.splice(1,0,{name:'Tom Thumb', id: '4'})
+				};
+			};
+
+			function ProjectController($scope) {
+				$scope.projects = projects;
+		
+			};
+			
+			function MenuController($scope) {
+				console.log($scope.menuState);
+				$scope.show = false;
+				
+					$scope.toggleMenu() = function() {
+					$scope.show = !$scope.show;
+				};
+			};
+			
+		</script>
+		
+	</body>
+</html>
